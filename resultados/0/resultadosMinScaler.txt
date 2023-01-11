@@ -1,0 +1,257 @@
+
+
+
+
+			Decision_Tree_Classifier
+
+
+
+Accuracy for model is: 0.161981 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.242574  0.318504  0.275402     28615
+           1   0.007936  0.005452  0.006464     28614
+
+    accuracy                       0.161981     57229
+   macro avg   0.125255  0.161978  0.140933     57229
+weighted avg   0.125257  0.161981  0.140935     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+-0.6760475400743156 
+
+Matthews Corrcoef
+
+-0.7118201001082063 
+
+##########################################################
+TEST RESULTS : 
+
+
+
+
+			GaussianNB_Classifier
+
+
+
+Accuracy for model is: 0.561551 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.999716  0.123152  0.219291     28615
+           1   0.532791  0.999965  0.695182     28614
+
+    accuracy                       0.561551     57229
+   macro avg   0.766254  0.561559  0.457236     57229
+weighted avg   0.766258  0.561551  0.457232     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.1231153586790451 
+
+Matthews Corrcoef
+
+0.2560484625277952 
+
+##########################################################
+TEST RESULTS : 
+
+
+
+
+			KNeighbors_Classifier
+
+
+
+Accuracy for model is: 0.707840 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   1.000000  0.415691  0.587262     28615
+           1   0.631182  1.000000  0.773895     28614
+
+    accuracy                       0.707840     57229
+   macro avg   0.815591  0.707846  0.680579     57229
+weighted avg   0.815594  0.707840  0.680577     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.4156868268737891 
+
+Matthews Corrcoef
+
+0.5122271739627031 
+
+##########################################################
+TEST RESULTS : 
+
+
+
+
+			LinearSVC
+
+
+
+Accuracy for model is: 0.833808 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.993287  0.672165  0.801767     28615
+           1   0.752251  0.995457  0.856932     28614
+
+    accuracy                       0.833808     57229
+   macro avg   0.872769  0.833811  0.829350     57229
+weighted avg   0.872771  0.833808  0.829349     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.6676179463649876 
+
+Matthews Corrcoef
+
+0.70550500631891 
+
+##########################################################
+TEST RESULTS : 
+
+
+
+
+			Logistic_Regression_Classifier
+
+
+
+Accuracy for model is: 0.799001 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.992687  0.602446  0.749831     28615
+           1   0.714623  0.995562  0.832017     28614
+
+    accuracy                       0.799001     57229
+   macro avg   0.853655  0.799004  0.790924     57229
+weighted avg   0.853657  0.799001  0.790923     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.5980037747764884 
+
+Matthews Corrcoef
+
+0.6503665286697814 
+
+##########################################################
+TEST RESULTS : 
+
+
+
+
+			Random_Forest_Classifier
+
+
+
+Accuracy for model is: 0.081008 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.136013  0.156561  0.145566     28615
+           1   0.006422  0.005452  0.005897     28614
+
+    accuracy                       0.081008     57229
+   macro avg   0.071218  0.081007  0.075731     57229
+weighted avg   0.071219  0.081008  0.075733     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+-0.8379890913777239 
+
+Matthews Corrcoef
+
+-0.8477192995926174 
+
+##########################################################
+TEST RESULTS : 
+
+
+
+
+			SGD_Classifier
+
+
+
+Accuracy for model is: 0.793339 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.991452  0.591788  0.741175     28615
+           1   0.709059  0.994898  0.828003     28614
+
+    accuracy                       0.793339     57229
+   macro avg   0.850255  0.793343  0.784589     57229
+weighted avg   0.850258  0.793339  0.784589     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.5866809940558073 
+
+Matthews Corrcoef
+
+0.6410766226821304 
+

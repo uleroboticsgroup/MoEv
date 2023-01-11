@@ -1,0 +1,14 @@
+The tool allows to obtain 2 subsets of the dataset provided and whose data is balanced by the user.
+
+The required arguments are:
+
+-f: path of the csv file corresponding to the dataset from which you want to obtain the subsets.
+
+-p1: percentage value (1-100). Indicates the size of the new subset (dataset1), calculated from the original dataset.
+-p2: percentage value (1-100). Indicates the size of the new subset (dataset2), calculated from the original dataset.
+
+-b1: percentage value. Indicates the number of records labeled benign (dataset1).
+-b2: percentage value. Indicates the number of records labeled benign (dataset2).
+
+-o1: path where the new dataset will be saved (dataset1). By default it is saved in the folder from which the script is launched with the name dataset1.csv.
+-o2: path where the new dataset (dataset2) will be saved. By default it is saved in the folder from which the script is launched with the name dataset2.csv.

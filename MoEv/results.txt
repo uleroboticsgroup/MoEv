@@ -1,0 +1,66 @@
+Best params: {'dual': True, 'fit_intercept': True, 'loss': 'squared_hinge', 'max_iter': 800, 'penalty': 'l2'}
+
+
+			LinearSVC
+
+
+
+Accuracy for model is: 0.833808 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.993287  0.672165  0.801767     28615
+           1   0.752251  0.995457  0.856932     28614
+
+    accuracy                       0.833808     57229
+   macro avg   0.872769  0.833811  0.829350     57229
+weighted avg   0.872771  0.833808  0.829349     57229
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.6676179463649876 
+
+Matthews Corrcoef
+
+0.70550500631891 
+
+
+###########################################################
+
+
+			KNN
+
+algorithm=ball_tree, leaf_size=10, n_neighbors=1, p=1, weights=distance
+
+#############################################################################
+			
+			LR
+
+C=0.5, dual=False, fit_intercept=True, intercept_scaling=1.0, max_iter=20, penalty=none, solver=newton-cg; 0.92
+C=0.5, dual=False, fit_intercept=True, intercept_scaling=1.0, max_iter=70, penalty=none, solver=lbfgs;, score=0.987
+C=0.5, dual=False, fit_intercept=True, intercept_scaling=1.0, max_iter=70, penalty=none, solver=sag;, score=0.950 
+C=0.5, dual=False, fit_intercept=True, intercept_scaling=1.0, max_iter=70, penalty=none, solver=saga;, score=0.923 
+C=0.5, dual=False, fit_intercept=True, intercept_scaling=1.0, max_iter=70, penalty=none, solver=lbfgs;, score=0.987
+
+
+			RF
+
+criterion=gini, max_depth=1, max_features=auto, max_leaf_nodes=2, min_samples_leaf=2, min_samples_split=0.1, min_weight_fraction_leaf=0.1, n_estimators=80;, score=0.841 
+
+
+ 		SGD
+
+ early_stopping=False, l1_ratio=0.15, learning_rate=optimal, loss=perceptron, max_iter=1400, n_iter_no_change=9, penalty=none, shuffle=True;
+ early_stopping=False, l1_ratio=0.15, learning_rate=optimal, loss=perceptron, max_iter=1400, n_iter_no_change=3, penalty=none, shuffle=True;
+ early_stopping=False, l1_ratio=0.15, learning_rate=optimal, loss=perceptron, max_iter=1400, n_iter_no_change=3, penalty=none, shuffle=True;
+ early_stopping=False, l1_ratio=0.15, learning_rate=optimal, loss=perceptron, max_iter=800, n_iter_no_change=9, penalty=l2, shuffle=True;
+ early_stopping=False, l1_ratio=0.15, learning_rate=optimal, loss=perceptron, max_iter=800, n_iter_no_change=9, penalty=none, shuffle=True;
+ early_stopping=False, l1_ratio=0.15, learning_rate=optimal, loss=perceptron, max_iter=800, n_iter_no_change=3, penalty=elasticnet, shuffle=True;
