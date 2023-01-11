@@ -1,0 +1,401 @@
+
+
+
+
+      Ada_Boost_Classifier
+
+
+
+Accuracy for model is: 0.500000 
+
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.000000  0.000000  0.000000     11598
+           1   0.500000  1.000000  0.666667     11598
+
+    accuracy                       0.500000     23196
+   macro avg   0.250000  0.500000  0.333333     23196
+weighted avg   0.250000  0.500000  0.333333     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.0 
+
+Matthews Corrcoef
+
+0.0 
+
+
+
+      Bagging_Classifier
+
+
+
+Accuracy for model is: 0.500000 
+
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.000000  0.000000  0.000000     11598
+           1   0.500000  1.000000  0.666667     11598
+
+    accuracy                       0.500000     23196
+   macro avg   0.250000  0.500000  0.333333     23196
+weighted avg   0.250000  0.500000  0.333333     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.0 
+
+Matthews Corrcoef
+
+0.0 
+
+
+
+
+      Decision_Tree_Classifier
+
+
+
+Accuracy for model is: 0.500000 
+
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.000000  0.000000  0.000000     11598
+           1   0.500000  1.000000  0.666667     11598
+
+    accuracy                       0.500000     23196
+   macro avg   0.250000  0.500000  0.333333     23196
+weighted avg   0.250000  0.500000  0.333333     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.0 
+
+Matthews Corrcoef
+
+0.0 
+
+
+
+
+
+      GaussianNB_Classifier
+
+
+
+Accuracy for model is: 0.500000 
+
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.000000  0.000000  0.000000     11598
+           1   0.500000  1.000000  0.666667     11598
+
+    accuracy                       0.500000     23196
+   macro avg   0.250000  0.500000  0.333333     23196
+weighted avg   0.250000  0.500000  0.333333     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.0 
+
+Matthews Corrcoef
+
+0.0 
+
+
+      KNeighbors_Classifier
+
+
+
+Accuracy for model is: 0.884032 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   1.000000  0.768063  0.868819     11598
+           1   0.811730  1.000000  0.896083     11598
+
+    accuracy                       0.884032     23196
+   macro avg   0.905865  0.884032  0.882451     23196
+weighted avg   0.905865  0.884032  0.882451     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.7680634592171064 
+
+Matthews Corrcoef
+
+0.7895949888142543 
+
+
+
+
+      LinearSVC
+
+
+
+Accuracy for model is: 0.388127 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.437018  0.776255  0.559210     11598
+           1   0.000000  0.000000  0.000000     11598
+
+    accuracy                       0.388127     23196
+   macro avg   0.218509  0.388127  0.279605     23196
+weighted avg   0.218509  0.388127  0.279605     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+-0.22374547335747552 
+
+Matthews Corrcoef
+
+-0.3549151433684986 
+
+
+
+      Linear_Discriminant_Analysis
+
+
+
+Accuracy for model is: 0.481721 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.482052  0.490947  0.486459     11598
+           1   0.481377  0.472495  0.476895     11598
+
+    accuracy                       0.481721     23196
+   macro avg   0.481715  0.481721  0.481677     23196
+weighted avg   0.481715  0.481721  0.481677     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+-0.03655802724607682 
+
+Matthews Corrcoef
+
+-0.03656425204038811 
+
+
+
+
+      Logistic_Regression_Classifier
+
+
+
+Accuracy for model is: 0.376315 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.429429  0.752630  0.546844     11598
+           1   0.000000  0.000000  0.000000     11598
+
+    accuracy                       0.376315     23196
+   macro avg   0.214714  0.376315  0.273422     23196
+weighted avg   0.214714  0.376315  0.273422     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+-0.24737023624762888 
+
+Matthews Corrcoef
+
+-0.3756891308231383 
+
+
+      Quadratic_Discriminant_Analysis
+
+
+
+Accuracy for model is: 0.500000 
+
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.500000  1.000000  0.666667     11598
+           1   0.000000  0.000000  0.000000     11598
+
+    accuracy                       0.500000     23196
+   macro avg   0.250000  0.500000  0.333333     23196
+weighted avg   0.250000  0.500000  0.333333     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.0 
+
+Matthews Corrcoef
+
+0.0 
+
+
+
+
+      Random_Forest_Classifier
+
+
+
+Accuracy for model is: 0.500000 
+
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1308: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.000000  0.000000  0.000000     11598
+           1   0.500000  1.000000  0.666667     11598
+
+    accuracy                       0.500000     23196
+   macro avg   0.250000  0.500000  0.333333     23196
+weighted avg   0.250000  0.500000  0.333333     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+Cohen Kappa Score:
+
+0.0 
+
+Matthews Corrcoef
+
+0.0 
+
+
+
+      SGD_Classifier
+
+
+
+Accuracy for model is: 0.388645 
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+           0   0.437345  0.777289  0.559747     11598
+           1   0.000000  0.000000  0.000000     11598
+
+    accuracy                       0.388645     23196
+   macro avg   0.218673  0.388645  0.279873     23196
+weighted avg   0.218673  0.388645  0.279873     23196
+ 
+
+Confusion Matrix:
+
+
+
+
+/home/gripapc/.local/lib/python3.8/site-packages/sklearn/metrics/_plot/confusion_matrix.py:125: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig, ax = plt.subplots()
+Cohen Kappa Score:
+
+-0.22271081220900157 
+
+Matthews Corrcoef
+
+-0.3539904954211252 
