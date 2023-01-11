@@ -63,5 +63,5 @@ Decision_Tree_Classifier:
 
 In every model exists Gridsearch option that is not enabled by default, because it don´t work fine yet.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/RoboticsGroupULE/MoEv/bd4bf64142c6068dbc6f3070d78410b9799dd799?urlpath=lab%2Ftree%2Fsampling.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uleroboticsgroup/MoEv/65714a9baf9c7e01a8f326e9a27b56d482046a64?urlpath=lab%2Ftree%2Fsampling.ipynb)
 
