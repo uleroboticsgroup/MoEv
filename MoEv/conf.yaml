@@ -1,0 +1,425 @@
+##
+##
+## Copyright (c) 2020 Adrian Campazas Vega, Ignacio Samuel Crespo Martinez, Angel Manuel Guerrero Higueras.
+##
+## This file is part of MoEv 
+##
+## MoEv is free software: you can redistribute it and/or modify
+## it under the terms of the GNU Lesser General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## MoEv is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with this program. If not, see <http://www.gnu.org/licenses/>.
+##
+npy:
+  data_raw: ""
+  data_label: ""
+flows:
+  input_path: "../datasets/D2_escaneoYSql_PCA.csv"
+  output_path: ""
+
+autotest:
+  enabled: False
+  train_path: ""
+  test_path: ""
+
+
+models_path: "../models/dorothea/"
+
+export:
+  enabled: False
+
+testSaveModels:
+  enabled: True
+  all_dataset: True
+
+#Data prepare
+cleanData: 
+  enabled: False
+  fixCICError: False
+  removeBadColumns: False
+  parseIP: True
+  parseDate: True
+  removeFeature:
+    enabled: False
+    list: ['#:unix_secs', 'unix_nsecs' ,'sysuptime']
+  removeDuplicatedRows: False
+
+#Data analysis
+analyzeData:
+  enabled: False
+  nanValues: True
+  negativeValues: True
+  unimportantCol: True
+  infiniteValues:
+    enabled: False
+    list: ['Label']
+#Preprocessing
+preprocess:
+  enabled: False
+  variance:
+    enabled: False
+    limit: 0
+    list: ['Label']
+  maxScaler:
+    enabled: False
+  minScaler:
+    enabled: False
+  standardScaler:
+    enabled: True
+#Feature extraction
+featureReduction: 
+  enabled: False
+  kbest: 
+    enabled: False
+    function: f_regression #f_regression | chi2
+    k: 2
+  pca:
+    enabled: True
+    n_components: 2
+    random_state: 1
+    whiten: True
+
+Metrics:
+  accuracy: True
+  confusionMatrix: True
+  plotConfusionMatrix: False
+  cohenKappaScore: False
+  matthewsCorrcoef: False
+  overfitting: False
+  rocCurve: False  
+  report: True
+
+
+#Models
+Models:
+  Save_Models:
+    enabled: False
+  Decision_Tree_Classifier:
+    enabled: False
+    name: DecisionTreeClassifier
+    import: sklearn.tree
+    type: supervised
+    #parameterization
+    GridSearch:
+      enabled: False
+      dictionary:
+        criterion: ['gini', 'entropy']
+        splitter: ['best', 'random']
+        max_depth: [1 , 2, 3, 4, 5, 6]  #check ranges not concrete values
+        min_samples: [1 , 2, 3, 4, 5, 6]
+        min_samples_leaf: [1 , 2, 3, 4, 5, 6]
+        mim_weight_fraction_leaf: [1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+        max_features: ["auto", "sqrt", "log2", 1 , 2, 3, 4, 5, 6, 1.0 , 2.0, 3.0, 4.0, 5.0, 6.0] #rango floats, rango ints
+        random_state: [1 , 2, 3, 4, 5, 6]
+        max_leaf_nodes: [1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+        min_impurity_decrease: [1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+       # class_weight: None #Disctionary with classes
+        presort: [True, False]
+  Random_Forest_Classifier: 
+    import: Random_Forest_Classifier.random_forest_classifier
+    enabled: False
+    name: RandomForestClassifier
+    import: sklearn.ensemble
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        n_estimators: [20, 50, 80, 100, 150]
+        criterion: ['gini', 'entropy']
+        max_depth: [1, 2, 3, 4, 5, 6]
+        min_samples_split: [1, 2, 3, 4, 5, 6] 
+        min_samples_leaf: [1, 2, 3, 4, 5, 6]
+        min_weight_fraction: [1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+        max_features: ["auto", "sqrt", "log2", 1 , 2, 3, 4, 5, 6, 1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+        max_leaf_nodes: [1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+        min_impurity_decrease: [1.0 , 2.0, 3.0, 4.0, 5.0, 6.0]
+        bootstrap: [True, False]
+        oob_score: [True, False]
+        n_jobs: [-1, 1, 2, 3, 4, 5]
+        random_state: [1 , 2, 3, 4, 5, 6, RandomState]
+        verbose: [0, 1]
+        warm_start: [True, False]
+       # class_weight: None #Disctionary with classes
+  Ada_Boost_Classifier:
+    enabled: False 
+    name: AdaBoostClassifier
+    import: sklearn.ensemble
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        base_estimator: #Object or None
+        n_estimators: #range int
+        learning_rate: #range float
+        algorithm: ["SAMME", SAMME.R]
+        random_state: #range int o None
+  Quadratic_Discriminant_Analysis:
+    enabled: False 
+    name: QuadraticDiscriminantAnalysis
+    import: sklearn.discriminant_analysis
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        priors: #array
+        reg_param: #range of floats
+        store_covariance: [True, False]
+        tol: #range float
+  One_Vs_Rest_Classifier:
+    enabled: False
+    name: OneVsRestClassifier
+    import: sklearn.multiclass
+    type: supervised
+    arguments: 
+      import: sklearn.svm
+      function: LinearSVC
+    GridSearch:
+      enabled: False
+      dictionary:
+        estimator: #object
+        n_jobs: #range ints
+  MLP_Regressor_Classifier:
+    #It is not viable for traffic since it only accepts either binary or continuous data but not both
+    enabled: False
+    name: MLPRegressor
+    import: sklearn.neural_network
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        hidden_layer_sizes: #tuple, length = n_layers - 2, default (100,)
+        activation: ["identify", "logistic", "tanh", "relu"]
+        solver: ["lbfgs", "sgd", "adam"]
+        alpha: #range float
+        batch_size: #range int
+        learning_rate: ["constant", "invscalling", "adaptive"]
+        learning_rate_init: #range double
+        power_t: #range double
+        max_iter: #range int
+        shuffle: [True, False]
+        random_state: #range int o None
+        tol: #range float
+        verbose: [True, False]
+        warm_start: [True, False]
+        momentum: #range float
+        nesterovs_momentum: [True, False]
+        early_stopping: [True, False]
+        validation_fraction: #range float between 0 and 1
+        beta_1: #range between [0,1)
+        beta_2: #range between [0, 1)
+        epsilon: #range float
+        n_iter_no_change: #range int
+  Mini_Batch_KMeans_Classifier:
+    enabled: False
+    name: MiniBatchKMeans
+    import: sklearn.cluster
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        n_clusters: #integer range
+        init: [k-means++, random, ndarray]
+        max_iter: #range enteros
+        batch_size: #range int
+        verbose: [True, False]
+        compute_labels: [True, False]
+        random_state: [None]
+        tol: #range float
+        max_no_improvement: #range int
+        init_size: #range int
+        n_init: # range init
+        reassignment_ratio: #range float
+  Logistic_Regression_Classifier:
+    enabled: False
+    name: LogisticRegression
+    import: sklearn.linear_model
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        penalty: ['l1', 'l2', 'elasticnet']
+        dual: [True, False]
+        tol: 1e-4
+        C: [0.5, 1.0, 1,5, 2]
+        fit_intercept_scaling: [True, False]
+        #class_weight: #dictionary or "balanced"
+        intercept_scaling: [1.0, 1.5, 2, 2.5, 3]
+        random_state: [1, 2, 3, 4, 5, 6, 'RandomState']
+        solver: ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']
+        max_iter: [20, 50, 70, 100, 150]
+        multi_class: ['ovr', 'multinomial', 'auto']
+        verbose: [0, 1]
+        warm_start: [True, False]
+        n_jobs: [1, 2, 4, 6]
+        l1_ratio: [0, 1]
+  Linear_Discriminant_Analysis:
+    enabled: False
+    name: LinearDiscriminantAnalysis
+    import: sklearn.discriminant_analysis
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        solver: ['svd', 'lsqr', 'eigen']
+        shrinkage: ['auto', None] #range float between 0 and 1
+        priors: #array, optional, shape
+        n_components: #range ints
+        store_covariance: [True, False]
+        tol: #opcional range
+  KNeighbors_Classifier:
+    enabled: False
+    name: KNeighborsClassifier
+    import: sklearn.neighbors
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        n_neighbors: #range int
+        weights: ['uniform', 'distance'] #and callable
+        algorithm: ['auto', 'kd_tree', 'brute', 'auto']
+        leaf_size: #range int
+        p: #range int
+        metric: ['minkowski']
+        metric_params: #dictionary
+        n_jobs: None #or range int
+  GaussianNB_Classifier:
+    enabled: False
+    name: GaussianNB
+    import: sklearn.naive_bayes
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        priors: #array, shape
+        var_smoothing: #range float
+  SVC_Classifier:
+    enabled: False 
+    name: SVC
+    import: sklearn.svm
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        C: #range float
+        kernel: ['rbf', 'linear', 'poly', 'sigmoid']
+        degree: #range int
+        gamma: #range float
+        coef0: #range float
+        shrinking: [True, False]
+        probability: [True, False]
+        tol: #range float
+        cache_size: #range floar
+        class_weight: #dict or balanced
+        verbose: [True, False]
+        max_iter: #range int
+        decision_function_shape: ['ovo', 'ovr']
+        random_state: [ None ] #or range int, random state instance
+  SGD_Classifier:
+    enabled: False 
+    name: SGDClassifier
+    import: sklearn.linear_model
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+        loss: ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron', 'squared_loss', 'huber', 'epsilon_insensitive', 'squared_epsilon_intensitive']
+        penalty: ['none', 'l2', 'l1', 'elasticnet']
+        alpha: #range float
+        l1_ratio: # range float
+        fit_intercept: [True, False]
+        max_iter: #range int
+        tol: #range float or none
+        shuffle: [True, False]
+        verbose: #range int
+        epsilon: #range float
+        n_jobs: #range int
+        random_state: [ None ] #or range int, random state instance
+        learning_rate: ['constant', 'optimal', 'invscaling', 'adaptive']
+        eta0: #range double
+        power_t: #range double
+        early_stopping: [True, False]
+        validation_fraction: #range float entre 0 y 1
+        n_iter_no_change: #range int
+        class_weight: #dict class label witgh, balanced or none
+        warm_start: [True, False]
+        average: [True, False] #range int 
+  Bernoulli_Classifier:
+    enabled: False
+    name: BernoulliNB
+    import: sklearn.naive_bayes
+    type: supervised
+    GridSearch:
+      enabled: False
+      dictionary:
+  Gaussian_Process_Classifier:
+    enabled: False
+    name: GaussianProcessClassifier
+    import: sklearn.gaussian_process
+    type: supervised
+    GridSearch:
+      enabled: False
+  Bagging_Classifier:
+    enabled: False
+    name: BaggingClassifier
+    import: sklearn.ensemble
+    type: supervised
+    GridSearch:
+      enabled: False
+
+
+  Isolation_Forest:
+    enabled: False
+    name: IsolationForest
+    import: sklearn.ensemble
+    type: novelty
+    GridSearch: #https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html
+      enabled: True
+      dictionary:
+        n_estimators: [120]
+        max_features: [1.0]
+        contamination: [0.06391,0.05391,0.02391]
+        #max_samples: [98000,5000,10000,40000]
+        #bootstrap: [False]
+        random_state: [42]
+
+
+  Local_Outlier_Factor:
+    enabled: False
+    name: LocalOutlierFactor
+    import: sklearn.neighbors
+    type: novelty
+    GridSearch: 
+      enabled: True
+      dictionary:
+        n_neighbors: [1]
+        #algorithm: ['auto']
+        #leaf_size: [30]
+        #metric: ['cityblock']
+        #p: [2]
+        contamination: [0.00010]
+        novelty: [True] 
+
+
+  One_Class_SVM:
+    enabled: False
+    name: OneClassSVM
+    import: sklearn.svm
+    type: novelty
+    GridSearch: 
+      enabled: True
+      dictionary:
+        kernel: ['poly']
+        #degree: [3] #Degree of the polynomial kernel function (‘poly’). Ignored by all other kernels. 
+        gamma: [0.4]
+        #coef0 : [0.0,1.0] #Independent term in kernel function. It is only significant in ‘poly’ and ‘sigmoid’. 
+        #tol: [0.0005,0.55845] #float
+        nu: [0.1585]
+        #shrinking: [True] #bool
+        #cache_size: [300] #Specify the size of the kernel cache (in MB).
