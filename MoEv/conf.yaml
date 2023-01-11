@@ -21,7 +21,7 @@ npy:
   data_raw: ""
   data_label: ""
 flows:
-  input_path: "../datasets/netflow_sampling_250_50-50_test_limpio.csv"
+  input_path: "../datasets/dataset_bot_service_1000_limpio.csv"
   output_path: ""
 
 autotest:
@@ -30,7 +30,7 @@ autotest:
   test_path: ""
 
 
-models_path: "../models/250/"
+models_path: "../models/1000/"
 
 export:
   enabled: False
