@@ -1,4 +1,4 @@
-#############Repository structure############
+Repository structure:
 
 + DocuMoEv: Containing the documentation of the tool and how it processes the data
 
@@ -61,7 +61,7 @@ Decision_Tree_Classifier:
   import: sklearn.tree
 ```
 
-In every model exists Gridsearch option that is not enabled by default, because it don´t work fine yet.
+In every model exists Gridsearch option that is not enabled by defaul.
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uleroboticsgroup/MoEv/65714a9baf9c7e01a8f326e9a27b56d482046a64?urlpath=lab%2Ftree%2Fsampling.ipynb)
 
