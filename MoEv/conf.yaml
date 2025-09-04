@@ -21,7 +21,7 @@ npy:
   data_raw: ""
   data_label: ""
 flows:
-  input_path: "../datasets/normalizado/D2testSqlNormalizado.csv"
+  input_path: "../datasets/normalized/D3testSqlNormalized.csv"
   output_path: ""
 
 autotest:
@@ -30,7 +30,7 @@ autotest:
   test_path: ""
 
 
-models_path: "../models/"
+models_path: "../models/without-sampling/"
 
 export:
   enabled: False
