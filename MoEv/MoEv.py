@@ -332,7 +332,7 @@ class MoEv:
 					self.set_X(new_x)
 					logging.info("standardScaler aplied")		
 
-			logging.error("Preprocess option not activated. Change configuration file.")
+		logging.error("Preprocess option not activated. Change configuration file.")
 
 	#TODO ARREGLAR KBeast
 	def reductFeatures(self):

@@ -21,16 +21,16 @@ npy:
   data_raw: ""
   data_label: ""
 flows:
-  input_path: "../datasets/normalizado/testSqlNormalizado.csv"
-  output_path: "./datasets/normalizado/testSqlNormalizado.csv"
+  input_path: "../datasets/normalizado/D2testSqlNormalizado.csv"
+  output_path: ""
 
 autotest:
   enabled: False
-  train_path: "../datasets/normalizado/trainSqlNormalizado.csv"
-  test_path: "../datasets/normalizado/testSqlNormalizado.csv"
+  train_path: ""
+  test_path: ""
 
 
-models_path: "../models/0/"
+models_path: "../models/"
 
 export:
   enabled: False
@@ -135,10 +135,10 @@ Models:
       max_depth: 1
       max_features: 'auto'
       max_leaf_nodes: 2
-      min_samples_leaf: 2
-      min_samples_split: 0.1
+      min_samples_leaf: 1
+      min_samples_split: 0.5
       min_weight_fraction_leaf: 0.1
-      n_estimators: 80
+      n_estimators: 9
     GridSearch:
       enabled: False
       dictionary:
@@ -289,7 +289,7 @@ Models:
     parameters: 
       algorithm: 'ball_tree'
       leaf_size: 10
-      n_neighbors: 1
+      n_neighbors: 25
       p: 1
       weights: 'distance'
     GridSearch:
@@ -344,7 +344,7 @@ Models:
       loss: 'perceptron'
       max_iter: 1400
       n_iter_no_change: 9
-      penalty: 'none' 
+      penalty: 'l2' 
       shuffle: True
     GridSearch:
       enabled: False
