@@ -1,3 +1,13 @@
+  __  __       ______     
+ |  \/  |     |  ____|    
+ | \  / | ___ | |____   __
+ | |\/| |/ _ \|  __\ \ / /
+ | |  | | (_) | |___\ V / 
+ |_|  |_|\___/|______\_/  
+                          
+                          
+
+
 #############Repository structure############
 
 + DocuMoEv: Containing the documentation of the tool and how it processes the data

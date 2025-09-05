@@ -21,7 +21,7 @@ npy:
   data_raw: ""
   data_label: ""
 flows:
-  input_path: "../datasets/normalized/D3testSqlNormalized.csv"
+  input_path: "../datasets/normalized/D2testSqlNormalized.csv"
   output_path: ""
 
 autotest:
