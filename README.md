@@ -82,6 +82,3 @@ Decision_Tree_Classifier:
 ```
 
 In every model exists Gridsearch option that is not enabled by default, because it don´t work fine yet.
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uleroboticsgroup/MoEv/sql-mlp-paper?urlpath=%2Fdoc%2Ftree%2FSQLIA_Example.ipynb)
-
