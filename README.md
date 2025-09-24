@@ -16,7 +16,7 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uleroboticsgroup/MoEv/sql-mlp-paper?urlpath=%2Fdoc%2Ftree%2FSQLIA_Example.ipynb)
 [![python](https://img.shields.io/badge/Python-3.8-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0.html)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://github.com/uleroboticsgroup/MoEv/blob/main/LICENSE)
 
 ## ✨ Description
 
