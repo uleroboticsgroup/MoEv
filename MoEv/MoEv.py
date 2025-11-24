@@ -379,6 +379,23 @@ class MoEv:
 		y_test_pred = clf.predict(self.X_df_test)
 		test = accuracy_score(self.y_df_test , y_test_pred)
 		return float(test)
+	
+	def custom2Datasets(self, clf, X,y):
+		clf = clf.fit(X, y)
+		y_test_pred = clf.predict(self.X_df_test)
+		test = accuracy_score(self.y_df_test , y_test_pred)
+
+		# Test with other dataset
+
+		dataset = pd.read_csv("../datasets/normalized/D3testSql_normalized_deletion.csv")
+		# Drop label column
+		X_cic = dataset.drop("Label", axis=1)
+		y_cic = dataset["Label"]
+
+		y_test_pred = clf.predict(X_cic)
+		test_cic = accuracy_score(y_cic , y_test_pred)
+
+		return float(min(test, test_cic))
 
 	def votingclasiffier(self, voting_import, voting_name, estimators, voting):
 		conf = self.get_conf_file()
@@ -465,13 +482,14 @@ class MoEv:
 					#We check if the gridsearch option is enabled
 					if conf["Models"][key]["GridSearch"]["enabled"]:
 						
-						clf = GridSearchCV(model, conf["Models"][key]["GridSearch"]["dictionary"], cv=5, verbose=10, n_jobs=4, scoring=self.custom)
-						clf.fit(self.get_X(), self.get_y())
+						clf = GridSearchCV(model, conf["Models"][key]["GridSearch"]["dictionary"], cv=[(slice(None), slice(None))], verbose=10, n_jobs=15, scoring='accuracy')
+						clf.fit(self.get_X().to_numpy(), self.get_y().to_numpy())
 						logging.info("Best params: " + str(clf.best_params_))
+						logging.info("Score with best params: " + str(clf.best_score_))
 						#print(clf.best_params_)
 						#model_type = conf["Models"][key]["type"]
 						#model = test.gridSearch(model, self.get_X(), self.get_y(), conf["Models"][key]["GridSearch"]["dictionary"],model_type)
-						model = clf
+						model = clf.best_estimator_
 						model.modelName = key
 						logging.info("GridSearch applied to " + model.modelName + " model")
 					else:

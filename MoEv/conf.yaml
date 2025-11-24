@@ -20,17 +20,18 @@
 npy:
   data_raw: ""
   data_label: ""
+
 flows:
-  input_path: "../datasets/normalized/D2testSqlNormalized.csv"
+  input_path: "../datasets/normalized/D5testSql_normalized_deletion.csv"
   output_path: ""
 
 autotest:
   enabled: False
-  train_path: ""
-  test_path: ""
+  train_path: "../datasets/normalized/D1trainSql_normalized_deletion.csv"
+  test_path: "../datasets/normalized/D2testSql_normalized_deletion.csv"
 
 
-models_path: "../models/without-sampling/"
+models_path: "../models/sampling/"
 
 export:
   enabled: False
@@ -48,7 +49,7 @@ cleanData:
   parseDate: True
   removeFeature:
     enabled: True
-    list: ['nexthop','engine_id','engine_type','src_mask','dst_mask','src_as','dst_as','#:unix_secs','unix_nsecs','sysuptime','first','last', 'exaddr']
+    list: ['nexthop','engine_id','engine_type','src_mask','dst_mask','src_as','dst_as','#:unix_secs','unix_nsecs','sysuptime','first','last', 'exaddr', 'input','output']
   removeDuplicatedRows: False
 
 #Data analysis
@@ -126,7 +127,7 @@ Models:
         presort: [True, False]
   Random_Forest_Classifier: 
     import: Random_Forest_Classifier.random_forest_classifier
-    enabled: True
+    enabled: False
     name: RandomForestClassifier
     import: sklearn.ensemble
     type: supervised
@@ -140,7 +141,7 @@ Models:
       min_weight_fraction_leaf: 0.1
       n_estimators: 9
     GridSearch:
-      enabled: False
+      enabled: True
       dictionary:
         n_estimators: [85, 90,95]
         criterion: ['gini', 'entropy']
@@ -148,6 +149,17 @@ Models:
         min_samples_split: [0.1, 0.5, 0.9] 
         min_samples_leaf: [1, 2, 3]
         min_weight_fraction_leaf: [0.1 , 0.4]
+
+        # n_estimators: [200, 400, 800]              # más árboles estabilizan
+        # criterion: ['gini', 'entropy']             # ('entropy' ~ log_loss en nuevas versiones)
+        # max_depth: [null, 5, 10, 20]               # permite complejidad si hace falta
+        # min_samples_split: [2, 5, 10]              # enteros >> fracciones enormes
+        # min_samples_leaf: [1, 2, 4, 8]
+        # min_weight_fraction_leaf: [0.0]            # quita el freno del 10–40%
+        # max_features: ['sqrt', 'log2', 0.5]        # explora tamaño de subespacio
+        # bootstrap: [True]                           # habilita OOB si quieres
+
+
         #max_features: ["auto", "sqrt", "log2", 1 , 2]
         #max_leaf_nodes: [1 , 2 ]
         #min_impurity_decrease: [1.0 , 2.0]
@@ -185,44 +197,80 @@ Models:
     import: sklearn.svm
     type: supervised
     GridSearch:
-      enabled: False
+      enabled: True
       dictionary:
-        penalty: [l1, l2] #object
-        loss: ['hinge', 'squared_hinge']
-        dual: [True, False]
-        fit_intercept: [True, False]
-        max_iter: [800,1000,1200]
-  MLP_Regressor_Classifier:
+        # - loss: ['hinge']
+        #   penalty: ['l2']
+        #   dual: [True]              # hinge sólo con l2 y dual (liblinear)
+        #   fit_intercept: [True, False]
+        #   max_iter: [400, 800, 1000, 1200, 3000, 5000]
+        #   C: [0.01, 0.1, 1, 10, 100, 500, 1000]
+        #   random_state: [0,2,64,123]              # distintos seeds reproducibles
+        - loss: ['squared_hinge']
+          penalty: ['l2']
+          dual: [True, False]       # l2 + squared_hinge admite dual/primal
+          fit_intercept: [True, False]
+          max_iter: [100, 200, 400, 800, 1000, 1200, 3000, 5000]
+          C: [0.01, 0.1, 1, 10,80,  100,125, 150, 500]
+          random_state: [64,16,12,8,5]              # distintos seeds reproducibles
+          class_weight: [null, 'balanced']
+          tol: [0.00001, 0.0001, 0.001, 0.01]
+        # - loss: ['squared_hinge']
+        #   penalty: ['l1']
+        #   dual: [False]             # l1 sólo con squared_hinge y dual=False
+        #   fit_intercept: [True, False]
+        #   max_iter: [400, 800, 1000, 1200]
+        #   random_state: [0,2,64,123]              # distintos seeds reproducibles
+  MLP_Classifier:
     #It is not viable for traffic since it only accepts either binary or continuous data but not both
     enabled: False
-    name: MLPRegressor
+    name: MLPClassifier
     import: sklearn.neural_network
     type: supervised
     GridSearch:
-      enabled: False
+      enabled: True
       dictionary:
-        hidden_layer_sizes: #tuple, length = n_layers - 2, default (100,)
-        activation: ["identify", "logistic", "tanh", "relu"]
-        solver: ["lbfgs", "sgd", "adam"]
-        alpha: #range float
-        batch_size: #range int
-        learning_rate: ["constant", "invscalling", "adaptive"]
-        learning_rate_init: #range double
-        power_t: #range double
-        max_iter: #range int
-        shuffle: [True, False]
-        random_state: #range int o None
-        tol: #range float
-        verbose: [True, False]
-        warm_start: [True, False]
-        momentum: #range float
-        nesterovs_momentum: [True, False]
-        early_stopping: [True, False]
-        validation_fraction: #range float between 0 and 1
-        beta_1: #range between [0,1)
-        beta_2: #range between [0, 1)
-        epsilon: #range float
-        n_iter_no_change: #range int
+        # - solver: ["adam"]
+        #   hidden_layer_sizes: [[256,128,64],[256,128,64,32],[512,256],[512,256,128]]  # opcional aquí también
+        #   activation: ["relu", "tanh", "logistic"]
+        #   alpha: [0.0001, 0.001, 0.01]
+        #   learning_rate: ["constant", "invscaling", "adaptive"]
+        #   learning_rate_init: [0.001, 0.01, 0.1]
+        #   batch_size: ["auto"]
+        #   early_stopping: [True]
+        #   n_iter_no_change: [10]
+        #   validation_fraction: [0.1]
+        #   tol: [0.00001, 0.0001, 0.001]
+        #   max_iter: [200, 500]
+        #   random_state: [0,2,64,123]              # distintos seeds reproducibles
+
+          # random_state: [0,2,123,64]              # distintos seeds reproducibles
+        # - solver: ["lbfgs"]   # ignora batch_size/early_stopping/learning_rate
+        #   hidden_layer_sizes:
+        #     [[32, 16]]       # estructuras más profundas para probar capacidad
+        #   activation: ["tanh"]
+        #   alpha: [0.0001, 0.001]          # regularización L2
+        #   tol: [1e-6]          # criterio de parada
+        #   max_iter: [15000]             # número de iteraciones máximas
+        #   warm_start: [False, True]             # True = continúa entrenamiento si se relanza
+        #   random_state: [64]              # distintos seeds reproducibles
+        #   verbose: [False]                      # cambia a True si quieres ver la convergencia
+        - solver: ["sgd"]
+          hidden_layer_sizes: [[256,128,64]]
+          activation: ["relu", "tanh", "logistic"]
+          alpha: [0.0001, 0.001, 0.01]
+          learning_rate: ["constant", "invscaling", "adaptive"]
+          learning_rate_init: [0.001, 0.01, 0.1]
+          power_t: [0.5]              # solo afecta a "invscaling"
+          momentum: [0.9]          # valor de momentum
+          nesterovs_momentum: [True]  # requiere momentum > 0
+          batch_size: ["auto"]
+          shuffle: [False]
+          early_stopping: [True, False]
+          n_iter_no_change: [10, 20]
+          validation_fraction: [0.1, 0.2]
+          tol: [0.000001, 0.0001, 0.001]
+          max_iter: [200, 500,1000]
   Mini_Batch_KMeans_Classifier:
     enabled: False
     name: MiniBatchKMeans
@@ -244,7 +292,7 @@ Models:
         n_init: # range init
         reassignment_ratio: #range float
   Logistic_Regression_Classifier:
-    enabled: True
+    enabled: False
     name: LogisticRegression
     import: sklearn.linear_model
     type: supervised
@@ -256,16 +304,23 @@ Models:
       penalty: 'none'
       solver: 'sag'
     GridSearch:
-      enabled: False
+      enabled: True
       dictionary:
-        penalty: ['l1', 'l2', 'elasticnet','none']
-        dual: [True, False]
-        C: [0.5, 1.0, 2.0]
+        # penalty: ['l1', 'l2', 'elasticnet','none']
+        # dual: [True, False]
+        # C: [0.5, 1.0, 2.0]
+        # fit_intercept: [True, False]
+        # intercept_scaling: [1.0, 2.0, 3.0]
+        # solver: ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']
+        # max_iter: [20, 70, 150]
+        #==================================
+        solver: ['lbfgs', 'newton-cg']
+        penalty: ['l2', 'none']
+        C: [0.5, 1.0]
         fit_intercept: [True, False]
+        max_iter: [50, 60]
+        # ==================================
         #class_weight: #dictionary or "balanced"
-        intercept_scaling: [1.0, 2.0, 3.0]
-        solver: ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']
-        max_iter: [20, 70, 150]
         #warm_start: [True, False]
   Linear_Discriminant_Analysis:
     enabled: False
@@ -282,7 +337,7 @@ Models:
         store_covariance: [True, False]
         tol: #opcional range
   KNeighbors_Classifier:
-    enabled: True
+    enabled: False
     name: KNeighborsClassifier
     import: sklearn.neighbors
     type: supervised
@@ -293,7 +348,7 @@ Models:
       p: 1
       weights: 'distance'
     GridSearch:
-      enabled: False
+      enabled: True
       dictionary:
         n_neighbors: [1,5,3,8,10] #range int
         weights: ['uniform', 'distance'] #and callable
@@ -333,7 +388,7 @@ Models:
         decision_function_shape: ['ovo', 'ovr']
         random_state: [ None ] #or range int, random state instance
   SGD_Classifier:
-    enabled: True 
+    enabled: False 
     name: SGDClassifier
     import: sklearn.linear_model
     type: supervised
@@ -347,7 +402,7 @@ Models:
       penalty: 'l2' 
       shuffle: True
     GridSearch:
-      enabled: False
+      enabled: True
       dictionary:
         loss: ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron', 'squared_error', 'huber', 'epsilon_insensitive', 'squared_epsilon_intensitive']
         penalty: ['none', 'l2', 'l1', 'elasticnet']
@@ -360,6 +415,7 @@ Models:
         #power_t: [0.5,  0.4] #range double
         early_stopping: [True, False]
         n_iter_no_change: [3,9] #range int
+        eta0: [0.0001, 0.001, 0.01]
         #warm_start: [True, False]
         #average: [True, False] #range int 
   Bernoulli_Classifier:
@@ -385,7 +441,7 @@ Models:
     GridSearch:
       enabled: False
   Voting_Classifier:
-    enabled: True
+    enabled: False
     name: VotingClassifier
     import: sklearn.ensemble
     type: supervised
