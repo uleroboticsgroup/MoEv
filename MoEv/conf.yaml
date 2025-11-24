@@ -22,7 +22,7 @@ npy:
   data_label: ""
 
 flows:
-  input_path: "../datasets/normalized/D5testSql_normalized_deletion.csv"
+  input_path: "../datasets/normalized/D2testSql_normalized.csv"
   output_path: ""
 
 autotest:
@@ -31,7 +31,7 @@ autotest:
   test_path: "../datasets/normalized/D2testSql_normalized_deletion.csv"
 
 
-models_path: "../models/sampling/"
+models_path: "../models/without-sampling/"
 
 export:
   enabled: False
