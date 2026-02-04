@@ -381,13 +381,15 @@ class MoEv:
 		return float(test)
 	
 	def custom2Datasets(self, clf, X,y):
+		conf = self.get_conf_file()
+
 		clf = clf.fit(X, y)
 		y_test_pred = clf.predict(self.X_df_test)
 		test = accuracy_score(self.y_df_test , y_test_pred)
 
 		# Test with other dataset
 
-		dataset = pd.read_csv("../datasets/normalized/D3testSql_normalized_deletion.csv")
+		dataset = pd.read_csv(conf["autotest"]["test_path"])
 		# Drop label column
 		X_cic = dataset.drop("Label", axis=1)
 		y_cic = dataset["Label"]
@@ -482,7 +484,7 @@ class MoEv:
 					#We check if the gridsearch option is enabled
 					if conf["Models"][key]["GridSearch"]["enabled"]:
 						
-						clf = GridSearchCV(model, conf["Models"][key]["GridSearch"]["dictionary"], cv=[(slice(None), slice(None))], verbose=10, n_jobs=15, scoring='accuracy')
+						clf = GridSearchCV(model, conf["Models"][key]["GridSearch"]["dictionary"], cv=[(slice(None), slice(None))], verbose=10, n_jobs=15, scoring=self.custom)
 						clf.fit(self.get_X().to_numpy(), self.get_y().to_numpy())
 						logging.info("Best params: " + str(clf.best_params_))
 						logging.info("Score with best params: " + str(clf.best_score_))

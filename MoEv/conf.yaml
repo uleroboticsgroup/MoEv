@@ -22,22 +22,22 @@ npy:
   data_label: ""
 
 flows:
-  input_path: "../datasets/normalized/D2testSql_normalized.csv"
+  input_path: "../datasets/normalized/D6trainSql_normalized.csv"
   output_path: ""
 
 autotest:
-  enabled: False
-  train_path: "../datasets/normalized/D1trainSql_normalized_deletion.csv"
-  test_path: "../datasets/normalized/D2testSql_normalized_deletion.csv"
+  enabled: True
+  train_path: "../datasets/normalized/D6trainSql_normalized.csv"
+  test_path: "../datasets/normalized/D7testSql_normalized.csv"
 
 
-models_path: "../models/without-sampling/"
+models_path: "../models/sampling-500/"
 
 export:
   enabled: False
 
 testSaveModels:
-  enabled: True
+  enabled: False
   all_dataset: True
 
 #Data prepare 
@@ -49,7 +49,7 @@ cleanData:
   parseDate: True
   removeFeature:
     enabled: True
-    list: ['nexthop','engine_id','engine_type','src_mask','dst_mask','src_as','dst_as','#:unix_secs','unix_nsecs','sysuptime','first','last', 'exaddr', 'input','output']
+    list: ['nexthop','engine_id','engine_type','src_mask','dst_mask','src_as','dst_as','#:unix_secs','unix_nsecs','sysuptime','first','last', 'exaddr', 'input','output','srcaddr','dstaddr']
   removeDuplicatedRows: False
 
 #Data analysis
@@ -103,7 +103,7 @@ Metrics:
 #Models
 Models:
   Save_Models:
-    enabled: False
+    enabled: True
   Decision_Tree_Classifier:
     enabled: False
     name: DecisionTreeClassifier
@@ -192,7 +192,7 @@ Models:
         store_covariance: [True, False]
         tol: #range float
   LinearSVC:
-    enabled: True
+    enabled: False
     name: LinearSVC
     import: sklearn.svm
     type: supervised
@@ -223,7 +223,7 @@ Models:
         #   random_state: [0,2,64,123]              # distintos seeds reproducibles
   MLP_Classifier:
     #It is not viable for traffic since it only accepts either binary or continuous data but not both
-    enabled: False
+    enabled: True
     name: MLPClassifier
     import: sklearn.neural_network
     type: supervised
@@ -255,22 +255,40 @@ Models:
         #   warm_start: [False, True]             # True = continúa entrenamiento si se relanza
         #   random_state: [64]              # distintos seeds reproducibles
         #   verbose: [False]                      # cambia a True si quieres ver la convergencia
-        - solver: ["sgd"]
-          hidden_layer_sizes: [[256,128,64]]
-          activation: ["relu", "tanh", "logistic"]
-          alpha: [0.0001, 0.001, 0.01]
-          learning_rate: ["constant", "invscaling", "adaptive"]
-          learning_rate_init: [0.001, 0.01, 0.1]
-          power_t: [0.5]              # solo afecta a "invscaling"
-          momentum: [0.9]          # valor de momentum
-          nesterovs_momentum: [True]  # requiere momentum > 0
-          batch_size: ["auto"]
-          shuffle: [False]
-          early_stopping: [True, False]
-          n_iter_no_change: [10, 20]
-          validation_fraction: [0.1, 0.2]
-          tol: [0.000001, 0.0001, 0.001]
-          max_iter: [200, 500,1000]
+        # - solver: ["sgd"]
+        #   hidden_layer_sizes: [[32,16], [64,32], [128,64]]
+        #   activation: ["relu", "tanh", "logistic"]
+        #   alpha: [0.0001, 0.001, 0.01]
+        #   learning_rate: ["constant", "invscaling", "adaptive"]
+        #   learning_rate_init: [0.001, 0.01, 0.1]
+        #   power_t: [0.5]              # solo afecta a "invscaling"
+        #   momentum: [0.9, 0.8]          # valor de momentum
+        #   nesterovs_momentum: [True]  # requiere momentum > 0
+        #   batch_size: ["auto"]
+        #   shuffle: [False]
+        #   early_stopping: [True, False]
+        #   n_iter_no_change: [10, 20]
+        #   validation_fraction: [0.1, 0.2]
+        #   tol: [0.000001, 0.0001, 0.001]
+        #   max_iter: [200, 500,1000,1500]
+        # - solver: ["sgd"]
+        #   hidden_layer_sizes: [[128,64]]
+        #   activation: ["relu"]
+        #   alpha: [0.0001, 0.001, 0.01]
+        #   learning_rate: ["constant", "invscaling", "adaptive"]
+        #   learning_rate_init: [0.001, 0.01, 0.1]
+        #   power_t: [0.5]              # solo afecta a "invscaling"
+        #   momentum: [0.9, 0.8]          # valor de momentum
+        #   nesterovs_momentum: [True]  # requiere momentum > 0
+        #   batch_size: ["auto"]
+        #   shuffle: [False]
+        #   early_stopping: [True, False]
+        #   n_iter_no_change: [10, 20]
+        #   validation_fraction: [0.2]
+        #   tol: [0.0001]
+        #   max_iter: [1500,2000]
+        #   random_state: [64,16,8,4,2]              # distintos seeds reproducibles
+
   Mini_Batch_KMeans_Classifier:
     enabled: False
     name: MiniBatchKMeans
