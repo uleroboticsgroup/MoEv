@@ -553,6 +553,9 @@ class MoEv:
 		if conf["Metrics"]["rocCurve"]:
 				test.plotRocCurve(model,X_test, y_test)
 				logging.info("Confusion Matrix plotted")
+		if conf["Metrics"]["farmetric"]:
+				test.farmetric(predictions, y_test)
+				logging.info("FAR Metric report shown")
 		if conf["Metrics"]["overfitting"]:
 				#TODO REVISAR ESTA METRICA ANTES SE USABA XTRAIN YTRAIN
 		        test.learning_curves(model,X_test, y_test)

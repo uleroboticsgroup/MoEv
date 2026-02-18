@@ -124,6 +124,11 @@ def matthewsCorrcoef(predictions, Y_test):
 	logging.info("Matthews Corrcoef\n\n%s \n" % matthews_corrcoef(Y_test, predictions))
 	print("Matthews Corrcoef\n\n%s \n" % matthews_corrcoef(Y_test, predictions))	
 
+def farmetric(predictions, Y_test):
+	tn, fp, _, _ = confusion_matrix(Y_test, predictions).ravel()
+	FAR = fp / (fp + tn) if (fp + tn) > 0 else 0
+	logging.info("FAR Metric:\n\n%s \n" % FAR)
+	print("FAR Metric:\n\n%s \n" % FAR)
 
 def plotConfusionMatrix(model_name,cm, display_labels):
 	# calculate confusion matrix

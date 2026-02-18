@@ -22,11 +22,11 @@ npy:
   data_label: ""
 
 flows:
-  input_path: "../datasets/normalized/D6trainSql_normalized.csv"
+  input_path: "../datasets/normalized/D7testSql_normalized.csv"
   output_path: ""
 
 autotest:
-  enabled: True
+  enabled: False
   train_path: "../datasets/normalized/D6trainSql_normalized.csv"
   test_path: "../datasets/normalized/D7testSql_normalized.csv"
 
@@ -37,7 +37,7 @@ export:
   enabled: False
 
 testSaveModels:
-  enabled: False
+  enabled: True
   all_dataset: True
 
 #Data prepare 
@@ -95,6 +95,7 @@ Metrics:
   plotConfusionMatrix: True
   cohenKappaScore: True
   matthewsCorrcoef: True
+  farmetric: True
   overfitting: False
   rocCurve: False  
   report: True
@@ -103,7 +104,7 @@ Metrics:
 #Models
 Models:
   Save_Models:
-    enabled: True
+    enabled: False
   Decision_Tree_Classifier:
     enabled: False
     name: DecisionTreeClassifier
@@ -463,7 +464,7 @@ Models:
     name: VotingClassifier
     import: sklearn.ensemble
     type: supervised
-    estimators: ["KNeighbors_Classifier","SGD_Classifier","Logistic_Regression_Classifier","LinearSVC","Random_Forest_Classifier"]
+    estimators: ["KNeighbors_Classifier","SGD_Classifier","Logistic_Regression_Classifier","LinearSVC","Random_Forest_Classifier","MLP_Classifier"]
     voting: 'hard' #soft or hard
     GridSearch:
       enabled: False
