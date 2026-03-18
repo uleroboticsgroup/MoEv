@@ -108,14 +108,13 @@ def classificationReport(predictions, Y_test):
 	print("Classification report:\n\n%s \n" % classification_report(Y_test, predictions, digits=6))
 
 def confusionMatrix (predictions, Y_test, classes, normalize=False, title='Confusion matrix', cmap=plt.cm.Blues):
-	
-	
-	# calculate confusion matrix
-
+	# Calculate confusion matrix
 	print("Confusion Matrix:\n")
 	cm = confusion_matrix(Y_test, predictions)
 	np.set_printoptions(precision=2)
 	return cm
+
+
 def cohenKappaScore(predictions, Y_test):
 	logging.info("Cohen Kappa Score:\n\n%s \n" % cohen_kappa_score(Y_test, predictions))
 	print("Cohen Kappa Score:\n\n%s \n" % cohen_kappa_score(Y_test, predictions))

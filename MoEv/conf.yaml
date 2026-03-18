@@ -31,7 +31,7 @@ autotest:
   test_path: "../datasets/normalized/D7testSql_normalized.csv"
 
 
-models_path: "../models/sampling-500/"
+models_path: "../models/sampling/"
 
 export:
   enabled: False
@@ -133,16 +133,22 @@ Models:
     import: sklearn.ensemble
     type: supervised
     parameters:
+      bootstrap: True
+      ccp_alpha: 0.0
       criterion: 'gini'
-      max_depth: 1
+      max_depth: 2
       max_features: 'auto'
       max_leaf_nodes: 2
+      min_impurity_decrease: 0.0
       min_samples_leaf: 1
-      min_samples_split: 0.5
+      min_samples_split: 0.1
       min_weight_fraction_leaf: 0.1
-      n_estimators: 9
+      n_estimators: 40
+      oob_score: False
+      verbose: 0
+      warm_start: False   
     GridSearch:
-      enabled: True
+      enabled: False
       dictionary:
         n_estimators: [85, 90,95]
         criterion: ['gini', 'entropy']
@@ -197,8 +203,21 @@ Models:
     name: LinearSVC
     import: sklearn.svm
     type: supervised
+    parameters:
+      C: 500
+      class_weight: null
+      dual: True
+      fit_intercept: True
+      intercept_scaling: 1
+      loss: 'squared_hinge'
+      max_iter: 200
+      multi_class: 'ovr'
+      penalty: 'l2'
+      random_state: 16
+      tol: 0.00001
+      verbose: 0   
     GridSearch:
-      enabled: True
+      enabled: False
       dictionary:
         # - loss: ['hinge']
         #   penalty: ['l2']
@@ -224,12 +243,36 @@ Models:
         #   random_state: [0,2,64,123]              # distintos seeds reproducibles
   MLP_Classifier:
     #It is not viable for traffic since it only accepts either binary or continuous data but not both
-    enabled: True
+    enabled: False
     name: MLPClassifier
     import: sklearn.neural_network
     type: supervised
+    parameters:
+      activation: 'relu'
+      alpha: 0.00001
+      batch_size: 64
+      beta_1: 0.9
+      beta_2: 0.999
+      early_stopping: True
+      epsilon: 0.00000001
+      hidden_layer_sizes: [64, 32]
+      learning_rate: 'constant'
+      learning_rate_init: 0.01
+      max_fun: 15000
+      max_iter: 200
+      momentum: 0.9
+      n_iter_no_change: 20
+      nesterovs_momentum: True
+      power_t: 0.5
+      random_state: 74
+      shuffle: True
+      solver: 'adam'
+      tol: 0.0001
+      validation_fraction: 0.2
+      verbose: False
+      warm_start: False   
     GridSearch:
-      enabled: True
+      enabled: False
       dictionary:
         # - solver: ["adam"]
         #   hidden_layer_sizes: [[256,128,64],[256,128,64,32],[512,256],[512,256,128]]  # opcional aquí también
@@ -316,12 +359,19 @@ Models:
     import: sklearn.linear_model
     type: supervised
     parameters:
+      C: 0.5
+      class_weight: None
       dual: False
       fit_intercept: True
       intercept_scaling: 1.0
-      max_iter: 150
+      l1_ratio: None
+      max_iter: 20
+      multi_class: 'auto'
       penalty: 'none'
-      solver: 'sag'
+      solver: 'newton-cg'
+      tol: 0.0001
+      verbose: 0
+      warm_start: False   
     GridSearch:
       enabled: True
       dictionary:
@@ -362,12 +412,13 @@ Models:
     type: supervised
     parameters: 
       algorithm: 'ball_tree'
-      leaf_size: 10
-      n_neighbors: 25
-      p: 1
-      weights: 'distance'
+      leaf_size: 5
+      metric: 'minkowski'
+      n_neighbors: 10
+      p: 2
+      weights: 'distance'   
     GridSearch:
-      enabled: True
+      enabled: False
       dictionary:
         n_neighbors: [1,5,3,8,10] #range int
         weights: ['uniform', 'distance'] #and callable
@@ -412,16 +463,28 @@ Models:
     import: sklearn.linear_model
     type: supervised
     parameters:
+      alpha: 0.0001
+      average: True
       early_stopping: False
+      epsilon: 0.1
+      eta0: 0.0
+      fit_intercept: True
       l1_ratio: 0.15
       learning_rate: 'optimal'
-      loss: 'perceptron'
-      max_iter: 1400
+      loss: 'modified_huber'
+      max_iter: 500
       n_iter_no_change: 9
-      penalty: 'l2' 
+      n_jobs: None
+      penalty: 'l2'
+      power_t: 0.5
+      random_state: 1
       shuffle: True
+      tol: 0.0001
+      validation_fraction: 0.1
+      verbose: 0
+      warm_start: False  
     GridSearch:
-      enabled: True
+      enabled: False
       dictionary:
         loss: ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron', 'squared_error', 'huber', 'epsilon_insensitive', 'squared_epsilon_intensitive']
         penalty: ['none', 'l2', 'l1', 'elasticnet']
@@ -460,11 +523,12 @@ Models:
     GridSearch:
       enabled: False
   Voting_Classifier:
-    enabled: False
+    enabled: True
     name: VotingClassifier
     import: sklearn.ensemble
     type: supervised
-    estimators: ["KNeighbors_Classifier","SGD_Classifier","Logistic_Regression_Classifier","LinearSVC","Random_Forest_Classifier","MLP_Classifier"]
+    # estimators: ["KNeighbors_Classifier","SGD_Classifier","Logistic_Regression_Classifier","LinearSVC","Random_Forest_Classifier","MLP_Classifier"]
+    estimators: ["KNeighbors_Classifier","Logistic_Regression_Classifier","LinearSVC","MLP_Classifier","SGD_Classifier","Random_Forest_Classifier"]
     voting: 'hard' #soft or hard
     GridSearch:
       enabled: False
