@@ -22,16 +22,16 @@ npy:
   data_label: ""
 
 flows:
-  input_path: "../datasets/normalized/D7testSql_normalized.csv"
+  input_path: "../datasets/normalized/D2testSql_normalized.csv"
   output_path: ""
 
 autotest:
   enabled: False
-  train_path: "../datasets/normalized/D6trainSql_normalized.csv"
-  test_path: "../datasets/normalized/D7testSql_normalized.csv"
+  train_path: ""
+  test_path: ""
 
 
-models_path: "../models/sampling/"
+models_path: "../models/without-sampling/"
 
 export:
   enabled: False
