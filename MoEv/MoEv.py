@@ -484,7 +484,7 @@ class MoEv:
 					#We check if the gridsearch option is enabled
 					if conf["Models"][key]["GridSearch"]["enabled"]:
 						
-						clf = GridSearchCV(model, conf["Models"][key]["GridSearch"]["dictionary"], cv=[(slice(None), slice(None))], verbose=10, n_jobs=15, scoring=self.custom)
+						clf = GridSearchCV(model, conf["Models"][key]["GridSearch"]["dictionary"], cv=[(slice(None), slice(None))], verbose=10, n_jobs=15, scoring='accuracy')
 						clf.fit(self.get_X().to_numpy(), self.get_y().to_numpy())
 						logging.info("Best params: " + str(clf.best_params_))
 						logging.info("Score with best params: " + str(clf.best_score_))
